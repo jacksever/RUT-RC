@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.rut.rockingcarriage.ui.viewmodels.SensorViewModel" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/header_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/icon_rut"
+                android:contentDescription="@null" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/icon_rut_logo"
+                android:contentDescription="@null" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/header_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/header_title"
+            android:layout_marginTop="10dp"
+            android:background="@color/rut_blue" />
+
+        <ru.rut.rockingcarriage.ui.component.AccelerometerSensorView
+            android:id="@+id/stateUI"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/footer_divider"
+            android:layout_below="@id/header_divider"
+            android:sensors="@{viewModel.data}" />
+
+        <View
+            android:id="@+id/footer_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@id/state_data"
+            android:layout_marginBottom="10dp"
+            android:background="@color/rut_blue" />
+
+        <include
+            android:id="@+id/state_data"
+            layout="@layout/data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp" />
+
+    </RelativeLayout>
+</layout>

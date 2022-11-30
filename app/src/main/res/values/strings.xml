@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RUT-RC</string>
+
+    <string name="value_x">X: %s</string>
+    <string name="value_y">Y: %s</string>
+    <string name="value_z">Z: %s</string>
+
+    <string name="info_phone">%s %s</string>
+    <string name="info_app">Версия приложения: %s</string>
+</resources>

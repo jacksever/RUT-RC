@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.os.Build" />
+
+        <import type="ru.rut.rockingcarriage.BuildConfig" />
+
+        <variable
+            name="viewModel"
+            type="ru.rut.rockingcarriage.ui.viewmodels.SensorViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/x_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{@string/value_x(viewModel.data.x)}"
+            android:textColor="@color/rut_blue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="X: 13.333" />
+
+        <TextView
+            android:id="@+id/y_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{@string/value_y(viewModel.data.y)}"
+            android:textColor="@color/rut_blue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Y: 13.333" />
+
+        <TextView
+            android:id="@+id/z_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{@string/value_z(viewModel.data.z)}"
+            android:textColor="@color/rut_blue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Z: 13.333" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{@string/info_phone(Build.MANUFACTURER, Build.MODEL)}"
+            android:textColor="@color/rut_blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="Huawei COL-29" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{@string/info_app(BuildConfig.VERSION_NAME)}"
+            android:textColor="@color/rut_blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="Версия приложения: 1.0" />
+    </LinearLayout>
+</layout>
