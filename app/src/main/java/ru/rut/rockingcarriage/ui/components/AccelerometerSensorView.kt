@@ -1,4 +1,4 @@
-package ru.rut.rockingcarriage.ui.component
+package ru.rut.rockingcarriage.ui.components
 
 import android.content.Context
 import android.graphics.Canvas

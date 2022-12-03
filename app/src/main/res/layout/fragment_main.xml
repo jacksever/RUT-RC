@@ -45,7 +45,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/rut_blue" />
 
-        <ru.rut.rockingcarriage.ui.component.AccelerometerSensorView
+        <ru.rut.rockingcarriage.ui.components.AccelerometerSensorView
             android:id="@+id/stateUI"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -15,8 +15,6 @@ class SensorFragment : Fragment() {
 
     private val sensorViewModel: SensorViewModel by viewModels()
 
-    //private val mGravity = FloatArray(3)
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,11 +41,6 @@ class SensorFragment : Fragment() {
         super.onPause()
         sensorViewModel.stopRecording()
     }
-
-    //private val alpha = 0.97f
-    //mGravity[0] = alpha * mGravity[0] + (1 - alpha) * event.values[0]
-    //mGravity[1] = alpha * mGravity[1] + (1 - alpha) * event.values[1]
-    //mGravity[2] = alpha * mGravity[2] + (1 - alpha) * event.values[2]
 
     override fun onDestroyView() {
         _binding = null

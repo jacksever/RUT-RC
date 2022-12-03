@@ -10,8 +10,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.rut.rockingcarriage.manages.AccelerometerManager
+import ru.rut.rockingcarriage.manages.CsvFileManager
 import ru.rut.rockingcarriage.models.AccelerometerSensor
-import ru.rut.rockingcarriage.utils.AccelerometerManager
 
 class SensorViewModel(application: Application) :
     AndroidViewModel(application), SensorEventListener {
@@ -19,11 +20,13 @@ class SensorViewModel(application: Application) :
     val data: LiveData<AccelerometerSensor> = _data
 
     private val accelerometerManager = AccelerometerManager(application)
+    private val csvFileManager = CsvFileManager(application)
 
     override fun onSensorChanged(event: SensorEvent) {
         viewModelScope.launch {
             val sensor = AccelerometerSensor(event.values[0], event.values[1], event.values[2])
             _data.postValue(sensor)
+            csvFileManager.putSensorData(sensor)
         }
     }
 
@@ -33,6 +36,7 @@ class SensorViewModel(application: Application) :
 
     fun startRecording() {
         accelerometerManager.accelerometer?.also {
+            csvFileManager.startRecording()
             accelerometerManager.sensorManager.registerListener(
                 this,
                 it,
@@ -43,6 +47,8 @@ class SensorViewModel(application: Application) :
 
     fun stopRecording() {
         accelerometerManager.sensorManager.unregisterListener(this)
+        csvFileManager.stopRecording()
         _data.postValue(AccelerometerSensor())
+        csvFileManager.close()
     }
 }
