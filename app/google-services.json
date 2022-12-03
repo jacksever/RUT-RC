@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "153175412839",
+    "project_id": "rut-rc",
+    "storage_bucket": "rut-rc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153175412839:android:0a49a7aa03c5e908b004c2",
+        "android_client_info": {
+          "package_name": "ru.rut.rockingcarriage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153175412839-e0lpg74nv1v3a2s24klvmtugl5caetf9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.rut.rockingcarriage",
+            "certificate_hash": "5c2bf959a3cc8e9fd482ee16639c51b7b130949f"
+          }
+        },
+        {
+          "client_id": "153175412839-jjscsk16uttt2pejsubb3in09cp7q47o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZCzuQYIL56rv2On1zPl8C9jmXMY8tS1M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153175412839-jjscsk16uttt2pejsubb3in09cp7q47o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import ru.rut.rockingcarriage.R
 import ru.rut.rockingcarriage.databinding.FragmentMainBinding
+import ru.rut.rockingcarriage.ui.viewmodels.SensorFileViewModel
 import ru.rut.rockingcarriage.ui.viewmodels.SensorViewModel
 
 class SensorFragment : Fragment() {
@@ -14,6 +16,7 @@ class SensorFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val sensorViewModel: SensorViewModel by viewModels()
+    private val sensorFileViewModel: SensorFileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,23 +30,27 @@ class SensorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         with(binding) {
             viewModel = sensorViewModel
-            stateData.viewModel = sensorViewModel
+            stateData.sensorVM = sensorViewModel
+            stateData.fileVM = sensorFileViewModel
             lifecycleOwner = viewLifecycleOwner
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        sensorViewModel.startRecording()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        sensorViewModel.stopRecording()
+        binding.record.setOnClickListener {
+            with(binding.record) {
+                text = if (text == getString(R.string.button_start)) {
+                    sensorViewModel.startRecording()
+                    getString(R.string.button_stop)
+                } else {
+                    sensorViewModel.stopRecording()
+                    getString(R.string.button_start)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
         _binding = null
+        sensorViewModel.stopRecording()
         super.onDestroyView()
     }
 }

@@ -7,4 +7,8 @@
 
     <string name="info_phone">%s %s</string>
     <string name="info_app">Версия приложения: %s</string>
+    <string name="info_file">Вес файла: %s</string>
+
+    <string name="button_start">Начать запись</string>
+    <string name="button_stop">Остановить запись</string>
 </resources>

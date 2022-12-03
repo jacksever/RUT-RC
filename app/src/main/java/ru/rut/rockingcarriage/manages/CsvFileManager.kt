@@ -2,6 +2,10 @@ package ru.rut.rockingcarriage.manages
 
 import android.content.Context
 import android.os.Build
+import android.widget.Toast
+import androidx.core.net.toUri
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.opencsv.CSVWriter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,18 +28,28 @@ class CsvFileManager(private val context: Context) {
     }
 
     fun stopRecording() {
-        //TODO: transfer file to Firebase
-
-        //val file = File(context.filesDir, sensorsFileName)
-        //if (file.exists()) {
-        //    file.delete()
-        //}
+        val sensorsFile = File(context.filesDir, sensorsFileName)
+        val storage = Firebase.storage.reference.child(sensorsFileName)
+        if (sensorsFile.exists()) {
+            storage.putFile(sensorsFile.toUri())
+                .addOnSuccessListener {
+                    Timber.w("Pushed file is success!")
+                    Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show()
+                    if (sensorsFile.exists()) {
+                        sensorsFile.delete()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "Failed..", Toast.LENGTH_SHORT).show()
+                    Timber.e("Pushed file is failed: ${it.localizedMessage}")
+                }
+        }
     }
 
     private fun getFile(): File {
         val file = File(context.filesDir, sensorsFileName)
         if (!file.exists()) {
-            Timber.w("Not existing")
+            Timber.w("Creating a new file")
             file.createNewFile()
         }
 
@@ -45,7 +59,6 @@ class CsvFileManager(private val context: Context) {
     private fun putHeaders() {
         try {
             csvWriter.writeAll(listOf(arrayOf("DateTime", "X", "Y", "Z")))
-            Timber.w("Write headers to CSV file")
         } catch (exception: IOException) {
             Timber.e(exception.localizedMessage)
         }
@@ -64,7 +77,6 @@ class CsvFileManager(private val context: Context) {
                         )
                     )
                 )
-                Timber.i("Write sensor data to CSV file")
             } catch (exception: IOException) {
                 Timber.e(exception.localizedMessage)
             }
@@ -72,6 +84,11 @@ class CsvFileManager(private val context: Context) {
     }
 
     fun close() {
-        csvWriter.close()
+        try {
+            csvWriter.flush()
+            csvWriter.close()
+        } catch (_: IOException) {
+            Timber.i("CSVWriter was already closed")
+        }
     }
 }

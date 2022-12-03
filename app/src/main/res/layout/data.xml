@@ -8,8 +8,12 @@
         <import type="ru.rut.rockingcarriage.BuildConfig" />
 
         <variable
-            name="viewModel"
+            name="sensorVM"
             type="ru.rut.rockingcarriage.ui.viewmodels.SensorViewModel" />
+
+        <variable
+            name="fileVM"
+            type="ru.rut.rockingcarriage.ui.viewmodels.SensorFileViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +26,7 @@
             android:id="@+id/x_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{@string/value_x(viewModel.data.x)}"
+            android:text="@{@string/value_x(sensorVM.data.x)}"
             android:textColor="@color/rut_blue"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -33,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@{@string/value_y(viewModel.data.y)}"
+            android:text="@{@string/value_y(sensorVM.data.y)}"
             android:textColor="@color/rut_blue"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -44,30 +48,50 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@{@string/value_z(viewModel.data.z)}"
+            android:text="@{@string/value_z(sensorVM.data.z)}"
             android:textColor="@color/rut_blue"
             android:textSize="16sp"
             android:textStyle="bold"
             tools:text="Z: 13.333" />
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@{@string/info_phone(Build.MANUFACTURER, Build.MODEL)}"
-            android:textColor="@color/rut_blue"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="Huawei COL-29" />
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:gravity="start"
+                android:text="@{@string/info_phone(Build.MANUFACTURER, Build.MODEL)}"
+                android:textColor="@color/rut_blue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Huawei COL-29" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="end"
+                android:text="@{@string/info_app(BuildConfig.VERSION_NAME)}"
+                android:textColor="@color/rut_blue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Версия приложения: 1.0" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@{@string/info_app(BuildConfig.VERSION_NAME)}"
             android:textColor="@color/rut_blue"
             android:textSize="12sp"
             android:textStyle="bold"
-            tools:text="Версия приложения: 1.0" />
+            android:weight="@{fileVM.data}"
+            tools:text="Вес файла: 1 КБ" />
     </LinearLayout>
 </layout>

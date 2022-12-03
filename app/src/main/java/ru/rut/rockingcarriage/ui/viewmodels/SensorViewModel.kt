@@ -16,7 +16,7 @@ import ru.rut.rockingcarriage.models.AccelerometerSensor
 
 class SensorViewModel(application: Application) :
     AndroidViewModel(application), SensorEventListener {
-    private val _data: MutableLiveData<AccelerometerSensor> = MutableLiveData()
+    private val _data: MutableLiveData<AccelerometerSensor> = MutableLiveData(AccelerometerSensor())
     val data: LiveData<AccelerometerSensor> = _data
 
     private val accelerometerManager = AccelerometerManager(application)
