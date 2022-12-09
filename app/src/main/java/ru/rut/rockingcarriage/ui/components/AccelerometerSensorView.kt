@@ -9,18 +9,18 @@ import android.view.View
 import ru.rut.rockingcarriage.models.AccelerometerSensor
 
 class AccelerometerSensorView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
-    private var x1 = 50f
-    private var y1 = 50f
+    private var x1 = 50F
+    private var y1 = 50F
 
-    private val radius = 50f
+    private var dataX = 0F
+    private var dataY = 0F
+
+    private val radius = 50F
 
     private var paint = Paint().apply {
         color = Color.parseColor("#163E73")
         isAntiAlias = true
     }
-
-    private var xLike = 0f
-    private var yLike = 0f
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -32,30 +32,30 @@ class AccelerometerSensorView(context: Context, attrs: AttributeSet?) : View(con
     }
 
     private fun setXY(x: Float, y: Float) {
-        xLike += -x
-        yLike += y
-        x1 += xLike
-        y1 += yLike
+        dataX += -x
+        dataY += y
+        x1 += dataX
+        y1 += dataY
 
         val xBorder = measuredWidth
         val yBorder = measuredHeight
 
-        if (x1 > xBorder - 60f) {
-            x1 = xBorder - 60f
-            xLike = 0f
+        if (x1 > xBorder - 60F) {
+            x1 = xBorder - 60F
+            dataX = 0F
         } else if (x1 < 60) {
-            x1 = 60f
-            xLike = 0f
+            x1 = 60F
+            dataX = 0F
         }
 
-        if (y1 > yBorder - 60f) {
-            y1 = yBorder - 60f
-            yLike = 0f
+        if (y1 > yBorder - 60F) {
+            y1 = yBorder - 60F
+            dataY = 0f
         }
 
         if (y1 < 60) {
-            y1 = 60f
-            yLike = 0f
+            y1 = 60F
+            dataY = 0F
         }
 
         invalidate()
